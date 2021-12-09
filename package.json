@@ -2,15 +2,16 @@
   "name": "harperdb-functions",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "files": [
     "lib/**/*"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watchAll --verbose",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prestart": "npm run build",
+    "start": "node lib/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,8 +19,11 @@
     "node-fetch": "^2.6.6"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.3",
     "@types/node-fetch": "^2.5.10",
+    "jest": "^27.3.1",
     "prettier": "^2.4.1",
+    "ts-jest": "^27.0.7",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.5.2"

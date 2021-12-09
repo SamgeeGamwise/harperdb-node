@@ -6,7 +6,8 @@ const harper: harper = {
         url: "",
         authorization: ""
     },
-    schema: function (schema: string): { table: (table: string) => table } {
+    schema: function (schema: string): { table: (table: string, id?: string) => table } {
+        this.config.schema = schema
         return { table: db_table(schema, this.config) }
     },
     initialize: function (config: config): harper {
