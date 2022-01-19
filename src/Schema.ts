@@ -1,6 +1,6 @@
-import fetch from "./fetch"
-import Table from "./Table"
-import { config } from "./types"
+import fetch from './fetch'
+import Table from './Table'
+import { config } from './types'
 
 export default class Schema {
     private config: config
@@ -13,8 +13,8 @@ export default class Schema {
 
     create(): Promise<Response> {
         const body = {
-            operation: "create_schema",
-            schema: this.schema
+            operation: 'create_schema',
+            schema: this.schema,
         }
 
         return fetch(JSON.stringify(body), this.config)
@@ -22,14 +22,14 @@ export default class Schema {
 
     drop(): Promise<Response> {
         const body = {
-            operation: "drop_schema",
+            operation: 'drop_schema',
             schema: this.schema,
         }
 
         return fetch(JSON.stringify(body), this.config)
     }
 
-    table(table: string, hash_attribute: string = "id") {
+    table(table: string, hash_attribute: string = 'id') {
         return new Table(this.config, this.schema, table, hash_attribute)
     }
 }

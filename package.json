@@ -5,13 +5,14 @@
   "files": [
     "lib/**/*"
   ],
+  "main": "lib/Harper.js",
   "scripts": {
     "test": "jest --watchAll --verbose",
     "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "prestart": "npm run build",
-    "start": "node lib/index.js"
+    "prepare": "npm run format && npm run build",
+    "start": "npm run format && npm run build"
   },
   "author": "Samuel Krohn",
   "license": "ISC",

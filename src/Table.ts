@@ -1,5 +1,5 @@
-import fetch from "./fetch"
-import { config, body, condition, record, clauses } from "./types"
+import fetch from './fetch'
+import { config, body, condition, record, clauses } from './types'
 
 export default class Table {
     private config: config
@@ -11,20 +11,20 @@ export default class Table {
         select: Array<string>
     }
 
-    constructor(config: config, schema: string, table: string, hash_attribute: string = "id") {
+    constructor(config: config, schema: string, table: string, hash_attribute: string = 'id') {
         this.config = config
         this.schema = schema
         this.table = table
         this.hash_attribute = hash_attribute
-        this.parameters = { where: null, select: ["*"] }
+        this.parameters = { where: null, select: ['*'] }
     }
 
     create(): Promise<Response> {
         const body = {
-            operation: "create_table",
+            operation: 'create_table',
             schema: this.schema,
             table: this.table,
-            hash_attribute: this.hash_attribute
+            hash_attribute: this.hash_attribute,
         }
 
         return fetch(JSON.stringify(body), this.config)
@@ -32,7 +32,7 @@ export default class Table {
 
     drop(): Promise<Response> {
         const body = {
-            operation: "drop_table",
+            operation: 'drop_table',
             schema: this.schema,
             table: this.table,
         }
@@ -63,7 +63,7 @@ export default class Table {
 
     getById(id: string | number | Array<string | number>): Promise<Response> {
         const body: body = {
-            operation: "search_by_hash",
+            operation: 'search_by_hash',
             schema: this.schema,
             table: this.table,
         }
@@ -93,20 +93,19 @@ export default class Table {
 
     get(clauses: clauses): Promise<Response> {
         const body: body = {
-            operation: "search_by_conditions",
+            operation: 'search_by_conditions',
             schema: this.schema,
             table: this.table,
         }
 
         if (this.parameters.where !== null) {
-            body.operator = clauses.operator || "and"
+            body.operator = clauses.operator || 'and'
             body.offset = clauses.offset || 0
             body.limit = clauses.limit || undefined
 
-
             body.conditions = this.parameters.where.map((condition: condition) => {
-                if (typeof condition.search_type === "undefined") {
-                    return { ...condition, search_type: "contains" }
+                if (typeof condition.search_type === 'undefined') {
+                    return { ...condition, search_type: 'contains' }
                 } else {
                     return condition
                 }
@@ -114,10 +113,9 @@ export default class Table {
             body.get_attributes = this.parameters.select
 
             console.log(body)
-
         } else {
             return new Promise(() => {
-                throw "Must provide where() with get() statement"
+                throw 'Must provide where() with get() statement'
             })
         }
 
@@ -126,13 +124,13 @@ export default class Table {
 
     getAll(): Promise<Response> {
         const body: body = {
-            operation: "search_by_value",
+            operation: 'search_by_value',
             schema: this.schema,
             table: this.table,
         }
 
         body.search_attribute = this.hash_attribute
-        body.search_value = "*"
+        body.search_value = '*'
         body.get_attributes = this.parameters.select
 
         return fetch(JSON.stringify(body), this.config)
@@ -143,7 +141,7 @@ export default class Table {
 
     insert(data: object | Array<object>): Promise<Response> {
         const body: body = {
-            operation: "insert",
+            operation: 'insert',
             schema: this.schema,
             table: this.table,
         }
@@ -162,7 +160,7 @@ export default class Table {
 
     upsert(data: object | Array<object>): Promise<Response> {
         const body: body = {
-            operation: "upsert",
+            operation: 'upsert',
             schema: this.schema,
             table: this.table,
         }
@@ -176,17 +174,16 @@ export default class Table {
         return fetch(JSON.stringify(body), this.config)
     }
 
-
     update(id: string, fields: object): Promise<Response>
     update(record: record): Promise<Response>
     update(records: Array<record>): Promise<Response>
 
     update(id: string | record | Array<record>, fields?: object): Promise<Response> {
         const body: body = {
-            operation: "update",
+            operation: 'update',
             schema: this.schema,
             table: this.table,
-            records: [{ id, ...fields }]
+            records: [{ id, ...fields }],
         }
 
         if (Array.isArray(id)) {
@@ -207,7 +204,7 @@ export default class Table {
 
     delete(id: string | Array<string>): Promise<Response> {
         const body: body = {
-            operation: "delete",
+            operation: 'delete',
             schema: this.schema,
             table: this.table,
         }
@@ -221,5 +218,3 @@ export default class Table {
         return fetch(JSON.stringify(body), this.config)
     }
 }
-
-

@@ -1,14 +1,14 @@
-import Schema from "./Schema"
-import fetch from "./fetch"
-import { config } from "./types"
+import Schema from './Schema'
+import fetch from './fetch'
+import { config } from './types'
 
-export default class Harper {
+class Harper {
     private config: config = {
-        url: "",
-        authorization: ""
+        url: '',
+        authorization: '',
     }
 
-    constructor(config: { url: string, authorization: string }) {
+    constructor(config: { url: string; authorization: string }) {
         this.config = config
         return this
     }
@@ -19,10 +19,12 @@ export default class Harper {
 
     sql(statement: string): Promise<Response> {
         const body = {
-            operation: "sql",
-            sql: statement
+            operation: 'sql',
+            sql: statement,
         }
 
         return fetch(JSON.stringify(body), this.config)
     }
 }
+
+export default Harper
