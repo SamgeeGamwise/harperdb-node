@@ -1,7 +1,7 @@
 {
-  "name": "harperdb-functions",
+  "name": "hdb-functions",
   "version": "1.0.0",
-  "description": "",
+  "description": "JavaScript package for generating HarperDB requests",
   "files": [
     "lib/**/*"
   ],
@@ -13,7 +13,7 @@
     "prestart": "npm run build",
     "start": "node lib/index.js"
   },
-  "author": "",
+  "author": "Samuel Krohn",
   "license": "ISC",
   "dependencies": {
     "node-fetch": "^2.6.6"
