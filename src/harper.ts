@@ -1,19 +1,28 @@
-import db_table from "./table"
-import { harper, table, config } from "./types"
+import Schema from "./Schema"
+import fetch from "./fetch"
+import { config } from "./types"
 
-const harper: harper = {
-    config: {
+export default class Harper {
+    private config: config = {
         url: "",
         authorization: ""
-    },
-    schema: function (schema: string): { table: (table: string, id?: string) => table } {
-        this.config.schema = schema
-        return { table: db_table(schema, this.config) }
-    },
-    initialize: function (config: config): harper {
+    }
+
+    constructor(config: { url: string, authorization: string }) {
         this.config = config
         return this
-    },
-}
+    }
 
-export default harper
+    schema(schema: string): Schema {
+        return new Schema(this.config, schema)
+    }
+
+    sql(statement: string): Promise<Response> {
+        const body = {
+            operation: "sql",
+            sql: statement
+        }
+
+        return fetch(JSON.stringify(body), this.config)
+    }
+}
