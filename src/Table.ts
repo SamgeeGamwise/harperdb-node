@@ -91,17 +91,22 @@ export default class Table {
         })
     }
 
-    get(clauses: clauses): Promise<Response> {
+    get(clauses?: clauses): Promise<Response> {
         const body: body = {
             operation: 'search_by_conditions',
             schema: this.schema,
             table: this.table,
+            operator: 'and',
+            offset: 0,
+            limit: undefined,
         }
 
         if (this.parameters.where !== null) {
-            body.operator = clauses.operator || 'and'
-            body.offset = clauses.offset || 0
-            body.limit = clauses.limit || undefined
+            if (typeof clauses !== 'undefined') {
+                body.operator = clauses.operator
+                body.offset = clauses.offset
+                body.limit = clauses.limit
+            }
 
             body.conditions = this.parameters.where.map((condition: condition) => {
                 if (typeof condition.search_type === 'undefined') {
