@@ -1,0 +1,6 @@
+.prettierrc
+.gitignore
+package-lock.json
+tsconfig.json
+src/
+node_modules

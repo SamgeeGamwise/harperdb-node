@@ -75,20 +75,9 @@ export default class Table {
         }
 
         body.get_attributes = this.parameters.select
+        this.reset_parameters()
 
-        const response = fetch(JSON.stringify(body), this.config)
-
-        return new Promise((resolve, reject) => {
-            try {
-                if (response instanceof Array) {
-                    resolve(response[0])
-                } else {
-                    resolve(response)
-                }
-            } catch (error) {
-                reject(error)
-            }
-        })
+        return fetch(JSON.stringify(body), this.config)
     }
 
     get(clauses?: clauses): Promise<Response> {
@@ -116,14 +105,13 @@ export default class Table {
                 }
             })
             body.get_attributes = this.parameters.select
-
-            console.log(body)
         } else {
             return new Promise(() => {
                 throw 'Must provide where() with get() statement'
             })
         }
 
+        this.reset_parameters()
         return fetch(JSON.stringify(body), this.config)
     }
 
@@ -138,6 +126,7 @@ export default class Table {
         body.search_value = '*'
         body.get_attributes = this.parameters.select
 
+        this.reset_parameters()
         return fetch(JSON.stringify(body), this.config)
     }
 
@@ -221,5 +210,9 @@ export default class Table {
         }
 
         return fetch(JSON.stringify(body), this.config)
+    }
+
+    reset_parameters(): void {
+        this.parameters = { where: null, select: ['*'] }
     }
 }
