@@ -6,6 +6,7 @@
     "lib/**/*"
   ],
   "main": "lib/Harper.js",
+  "types": "lib/Harper.d.ts",
   "scripts": {
     "test": "jest --watchAll --verbose",
     "build": "tsc",
