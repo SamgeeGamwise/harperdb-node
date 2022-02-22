@@ -12,18 +12,18 @@ $ npm install hdb-functions
 
 ```js
 // ESM
-import { Harper } from 'hdb-functions'
+import { Harper } from 'hdb-functions';
 
 // CommonJs
-const { Harper } = require('hdb-functions')
+const { Harper } = require('hdb-functions');
 
 const harper = new Harper({
     url: 'HARPERDB_URL',
     authorization: 'HARPERDB_AUTHORIZATION',
-})
+});
 
-const schema = harper.schema('NAME_OF_SCHEMA')
-const table = schema.table('NAME_OF_TABLE')
+const schema = harper.schema('NAME_OF_SCHEMA');
+const table = schema.table('NAME_OF_TABLE');
 
 // ...
 ```
@@ -33,19 +33,25 @@ HarperDB URL and Authorization can be found within your HarperDB Studio configur
 ## Usage
 
 ```js
-import { Harper } from 'hdb-functions'
+import { Harper } from 'hdb-functions';
 
 const harper = new Harper({
     url: 'HARPERDB_URL',
     authorization: 'HARPERDB_AUTHORIZATION',
-})
+});
 
-const personTable = harper.schema('test').table('person')
-const person = { name: 'Bruce Wayne' }
-const people = [ person, { name: 'Kent Clark' } ]
+const personTable = harper.schema('test').table('person');
+const person = { name: 'Bruce Wayne' };
+const people = [ { name: 'Barry Allen' }, { name: 'Kent Clark' } ];
 
 (async () => {
-    await person.insert(person)
-    await person.insert(people)
-})()
+    await personTable.create();
+
+    await personTable.insert(person);
+    await personTable.insert(people);
+
+    const peopleList = await personTable.getAll();
+
+    await personTable.drop();
+})();
 ```
