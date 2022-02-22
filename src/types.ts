@@ -1,5 +1,3 @@
-import { type } from 'os'
-
 export type hash = string | number
 export type condition = { search_attribute: string; search_value: any; search_type?: string }
 export type record = { id: string; [key: string]: any }

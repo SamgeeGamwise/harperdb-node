@@ -1,19 +1,20 @@
 {
   "name": "hdb-functions",
-  "version": "1.0.0",
+  "version": "1.2.3",
   "description": "JavaScript package for generating HarperDB requests",
   "files": [
     "lib/**/*"
   ],
-  "main": "lib/Harper.js",
-  "types": "lib/Harper.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --watchAll --verbose",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run format && npm run build",
-    "start": "npm run format && npm run build"
+    "start": "npm run format && npm run build",
+    "prepublish": "npm run start"
   },
   "author": "Samuel Krohn",
   "license": "ISC",

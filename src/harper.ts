@@ -2,7 +2,7 @@ import Schema from './Schema'
 import fetch from './fetch'
 import { config } from './types'
 
-class Harper {
+export default class Harper {
     private config: config = {
         url: '',
         authorization: '',
@@ -26,5 +26,3 @@ class Harper {
         return fetch(JSON.stringify(body), this.config)
     }
 }
-
-export default Harper
