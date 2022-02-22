@@ -8,7 +8,7 @@ HDB Functions eases the use of HarperDB operations while from a Node.js environm
 $ npm install hdb-functions
 ```
 
-## Use in your Node.js app
+## Start using in your Node.js app
 
 ```js
 // ESM
@@ -30,7 +30,7 @@ const table = schema.table('NAME_OF_TABLE')
 
 HarperDB URL and Authorization can be found within your HarperDB Studio configuration.
 
-## Common Usage
+## Usage
 
 ```js
 import { Harper } from 'hdb-functions'
@@ -40,16 +40,12 @@ const harper = new Harper({
     authorization: 'HARPERDB_AUTHORIZATION',
 })
 
-const test = harper.schema('test')
-const person = test.table('person')
-
-const people = [{ name: "Bruce Wayne" }, { name: "Kent Clark" }]
+const personTable = harper.schema('test').table('person')
+const person = { name: 'Bruce Wayne' }
+const people = [ person, { name: 'Kent Clark' } ]
 
 (async () => {
-    await person.insert({
-            name: 'Bruce Wayne'
-        })
-
+    await person.insert(person)
     await person.insert(people)
 })()
 ```
