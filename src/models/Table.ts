@@ -1,5 +1,5 @@
-import fetch from './fetch'
-import { config, body, condition, record, clauses } from './types'
+import fetch from '../util/fetch'
+import { config, body, condition, record, clauses } from '../types'
 
 export default class Table {
     private config: config

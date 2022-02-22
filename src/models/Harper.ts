@@ -1,6 +1,6 @@
+import fetch from '../util/fetch'
 import Schema from './Schema'
-import fetch from './fetch'
-import { config } from './types'
+import { config } from '../types'
 
 export default class Harper {
     private config: config = {

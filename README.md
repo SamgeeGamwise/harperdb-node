@@ -1,6 +1,6 @@
 # HarperDB Functions
 
-HDB Functions eases the use of HarperDB operations while from a Node.js environment. Simplistic in design, it can be quickly added to any application.
+HDB Functions eases the use of HarperDB operations in a Node.js environment. Simplistic in design, it can be quickly added to any application.
 
 ## Install
 

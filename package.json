@@ -1,6 +1,6 @@
 {
   "name": "hdb-functions",
-  "version": "1.2.5",
+  "version": "1.2.8",
   "description": "JavaScript package for generating HarperDB requests",
   "files": [
     "lib/**/*"
@@ -8,13 +8,11 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "test": "jest --watchAll --verbose",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run format && npm run build",
-    "start": "npm run format && npm run build",
-    "prepublish": "npm run start"
+    "start": "npm run format && npm run build"
   },
   "keywords": [
     "HarperDB",

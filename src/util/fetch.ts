@@ -1,5 +1,5 @@
 import node_fetch, { RequestInit, Headers } from 'node-fetch'
-import { config } from './types'
+import { config } from '../types'
 
 export default async function fetch(body: string, config: config): Promise<Response> {
     const headers: Headers = new Headers()

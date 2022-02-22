@@ -1,6 +1,6 @@
-import fetch from './fetch'
+import fetch from '../util/fetch'
 import Table from './Table'
-import { config } from './types'
+import { config } from '../types'
 
 export default class Schema {
     private config: config
