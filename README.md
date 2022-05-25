@@ -1,21 +1,21 @@
-# HarperDB Functions
+# HarperDB for Node
 
-HDB Functions eases the use of HarperDB operations in a Node.js environment. Simplistic in design, it can be quickly added to any application.
+Ease the use of HarperDB operations in a Node.js environment. Simplistic in design, it can be quickly added to any application.
 
 ## Install
 
 ```
-$ npm install hdb-functions
+$ npm install harperdb-node
 ```
 
 ## Start using in your Node.js app
 
 ```js
 // ESM
-import { Harper } from 'hdb-functions';
+import { Harper } from 'harperdb-node';
 
 // CommonJs
-const { Harper } = require('hdb-functions');
+const { Harper } = require('harperdb-node');
 
 const harper = new Harper({
     url: 'HARPERDB_URL',
@@ -33,7 +33,7 @@ HarperDB URL and Authorization can be found within your HarperDB Studio configur
 ## Usage
 
 ```js
-import { Harper } from 'hdb-functions';
+import { Harper } from 'harperdb-node';
 
 const harper = new Harper({
     url: 'HARPERDB_URL',

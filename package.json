@@ -1,7 +1,7 @@
 {
-  "name": "hdb-functions",
-  "version": "1.2.8",
-  "description": "JavaScript package for generating HarperDB requests",
+  "name": "harperdb-node",
+  "version": "1.0.1",
+  "description": "JavaScript library written in TypeScript for generating HarperDB requests",
   "files": [
     "lib/**/*"
   ],
@@ -16,8 +16,10 @@
   },
   "keywords": [
     "HarperDB",
-    "HDB"
+    "HDB",
+    "Node"
   ],
+  "homepage": "https://github.com/Xoelos/harperdb-node",
   "author": "Samuel Krohn",
   "license": "ISC",
   "dependencies": {
