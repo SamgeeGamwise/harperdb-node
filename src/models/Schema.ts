@@ -29,7 +29,7 @@ export default class Schema {
         return fetch(JSON.stringify(body), this.config)
     }
 
-    table(table: string, hash_attribute: string = 'id') {
+    table(table: string, hash_attribute: string = 'id'): Table {
         return new Table(this.config, this.schema, table, hash_attribute)
     }
 }

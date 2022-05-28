@@ -1,11 +1,16 @@
 # HarperDB for Node
 
-Ease the use of HarperDB operations in a Node.js environment. Simplistic in design, it can be quickly added to any application.
+Ease the use of HarperDB Operations in a Node.js environment. Simplistic in design, it can be quickly added to any application.
 
 ## Install
 
+**Install with npm**
 ```
 $ npm install harperdb-node
+```
+**Install with yarn**
+```
+$ yarn add harperdb-node
 ```
 
 ## Start using in your Node.js app
@@ -19,7 +24,7 @@ const { Harper } = require('harperdb-node');
 
 const harper = new Harper({
     url: 'HARPERDB_URL',
-    authorization: 'HARPERDB_AUTHORIZATION',
+    authorization: 'Basic HARPERDB_AUTHORIZATION',
 });
 
 const schema = harper.schema('NAME_OF_SCHEMA');
@@ -37,14 +42,17 @@ import { Harper } from 'harperdb-node';
 
 const harper = new Harper({
     url: 'HARPERDB_URL',
-    authorization: 'HARPERDB_AUTHORIZATION',
+    authorization: 'Basic HARPERDB_AUTHORIZATION',
 });
 
-const personTable = harper.schema('test').table('person');
+const testSchema = harper.schema('test');
+const personTable = testSchema.table('person');
+
 const person = { name: 'Bruce Wayne' };
 const people = [ { name: 'Barry Allen' }, { name: 'Kent Clark' } ];
 
 (async () => {
+	await testSchema.create();
     await personTable.create();
 
     await personTable.insert(person);
@@ -53,5 +61,79 @@ const people = [ { name: 'Barry Allen' }, { name: 'Kent Clark' } ];
     const peopleList = await personTable.getAll();
 
     await personTable.drop();
+    await testSchema.drop();
 })();
+```
+
+## Docs
+
+***Harper*** **object**
+```
+schema(schema_name: string) -> Schema
+```
+```
+sql(raw_sql_statement: string) -> Promise
+```
+
+**&nbsp;&nbsp;**
+
+***Schema*** **object**
+```
+create() -> Promise
+```
+```
+drop() -> Promise
+```
+```
+table(table_name: string, hash_attribute: string?) -> Table
+```
+
+**&nbsp;&nbsp;**
+
+***Table*** **object**
+```
+create() -> Promise
+```
+```
+drop() -> Promise
+```
+**&nbsp;&nbsp;**
+```
+select(attributes: string[]) -> Table
+```
+```
+where(search_attribute: string, search_value: string) -> Table
+where(search_conditions: Array<{search_attribute: string, search_value: any, search_type: string?}>) -> Table
+```
+**&nbsp;&nbsp;**
+```
+getById(id: string | number) -> Promise
+getById(ids: string[] | number[]) -> Promise
+```
+```
+get(search_clauses: {operator: string, offset: number, limit: number}) -> Promise
+```
+```
+getAll() -> Promise
+```
+**&nbsp;&nbsp;**
+```
+insert(record: object) -> Promise
+insert(records: Array<object>) -> Promise
+```
+**&nbsp;&nbsp;**
+```
+upsert(record: object) -> Promise
+upsert(records: Array<object>) -> Promise
+```
+**&nbsp;&nbsp;**
+```
+update(id: string | number, record: object) -> Promise
+update(record: {id: string | number, ... }) -> Promise
+update(records: Array<{id: string | number, ... }>) -> Promise
+```
+**&nbsp;&nbsp;**
+```
+delete(id: string | number) -> Promise
+delete(ids: Array<string | number>) -> Promise
 ```

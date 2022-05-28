@@ -11,6 +11,10 @@ export default class Table {
         select: Array<string>
     }
 
+    private reset_parameters = (): void => {
+        this.parameters = { where: null, select: ['*'] }
+    }
+
     constructor(config: config, schema: string, table: string, hash_attribute: string = 'id') {
         this.config = config
         this.schema = schema
@@ -130,54 +134,54 @@ export default class Table {
         return fetch(JSON.stringify(body), this.config)
     }
 
-    insert(data: object): Promise<Response>
-    insert(data: Array<object>): Promise<Response>
+    insert(record: object): Promise<Response>
+    insert(records: Array<object>): Promise<Response>
 
-    insert(data: object | Array<object>): Promise<Response> {
+    insert(records: object | Array<object>): Promise<Response> {
         const body: body = {
             operation: 'insert',
             schema: this.schema,
             table: this.table,
         }
 
-        if (Array.isArray(data)) {
-            body.records = data
+        if (Array.isArray(records)) {
+            body.records = records
         } else {
-            body.records = [data]
+            body.records = [records]
         }
 
         return fetch(JSON.stringify(body), this.config)
     }
 
-    upsert(data: object): Promise<Response>
-    upsert(data: Array<object>): Promise<Response>
+    upsert(record: object): Promise<Response>
+    upsert(records: Array<object>): Promise<Response>
 
-    upsert(data: object | Array<object>): Promise<Response> {
+    upsert(records: object | Array<object>): Promise<Response> {
         const body: body = {
             operation: 'upsert',
             schema: this.schema,
             table: this.table,
         }
 
-        if (Array.isArray(data)) {
-            body.records = data
+        if (Array.isArray(records)) {
+            body.records = records
         } else {
-            body.records = [data]
+            body.records = [records]
         }
 
         return fetch(JSON.stringify(body), this.config)
     }
 
-    update(id: string, fields: object): Promise<Response>
+    update(id: string | number, data: object): Promise<Response>
     update(record: record): Promise<Response>
     update(records: Array<record>): Promise<Response>
 
-    update(id: string | record | Array<record>, fields?: object): Promise<Response> {
+    update(id: string | number | record | Array<record>, record?: object): Promise<Response> {
         const body: body = {
             operation: 'update',
             schema: this.schema,
             table: this.table,
-            records: [{ id, ...fields }],
+            records: [{ id, ...record }],
         }
 
         if (Array.isArray(id)) {
@@ -187,16 +191,16 @@ export default class Table {
             const record = id
             body.records = [record]
         } else {
-            body.records = [{ id, ...fields }]
+            body.records = [{ id, ...record }]
         }
 
         return fetch(JSON.stringify(body), this.config)
     }
 
-    delete(id: string): Promise<Response>
-    delete(ids: Array<string>): Promise<Response>
+    delete(id: string | number): Promise<Response>
+    delete(ids: Array<string | number>): Promise<Response>
 
-    delete(id: string | Array<string>): Promise<Response> {
+    delete(id: string | number | Array<string | number>): Promise<Response> {
         const body: body = {
             operation: 'delete',
             schema: this.schema,
@@ -210,9 +214,5 @@ export default class Table {
         }
 
         return fetch(JSON.stringify(body), this.config)
-    }
-
-    reset_parameters(): void {
-        this.parameters = { where: null, select: ['*'] }
     }
 }
