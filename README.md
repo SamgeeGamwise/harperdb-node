@@ -107,8 +107,8 @@ where(search_conditions: Array<{search_attribute: string, search_value: any, sea
 ```
 **&nbsp;&nbsp;**
 ```
-getById(id: string | number) -> Promise
-getById(ids: string[] | number[]) -> Promise
+getById(id: string) -> Promise
+getById(ids: string[]) -> Promise
 ```
 ```
 get(search_clauses: {operator: string, offset: number, limit: number}) -> Promise
@@ -128,12 +128,12 @@ upsert(records: Array<object>) -> Promise
 ```
 **&nbsp;&nbsp;**
 ```
-update(id: string | number, record: object) -> Promise
-update(record: {id: string | number, ... }) -> Promise
-update(records: Array<{id: string | number, ... }>) -> Promise
+update(id: string, record: object) -> Promise
+update(record: {id: string, ... }) -> Promise
+update(records: Array<{id: string, ... }>) -> Promise
 ```
 **&nbsp;&nbsp;**
 ```
-delete(id: string | number) -> Promise
-delete(ids: Array<string | number>) -> Promise
+delete(id: string) -> Promise
+delete(ids: string[]) -> Promise
 ```

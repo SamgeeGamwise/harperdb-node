@@ -62,10 +62,10 @@ export default class Table {
         return this
     }
 
-    getById(id: string | number): Promise<Response>
-    getById(ids: Array<string | number>): Promise<Response>
+    getById(id: string): Promise<Response>
+    getById(ids: string[]): Promise<Response>
 
-    getById(id: string | number | Array<string | number>): Promise<Response> {
+    getById(id: string | string[]): Promise<Response> {
         const body: body = {
             operation: 'search_by_hash',
             schema: this.schema,
@@ -172,11 +172,11 @@ export default class Table {
         return fetch(JSON.stringify(body), this.config)
     }
 
-    update(id: string | number, data: object): Promise<Response>
+    update(id: string, data: object): Promise<Response>
     update(record: record): Promise<Response>
     update(records: Array<record>): Promise<Response>
 
-    update(id: string | number | record | Array<record>, record?: object): Promise<Response> {
+    update(id: string | record | Array<record>, record?: object): Promise<Response> {
         const body: body = {
             operation: 'update',
             schema: this.schema,
@@ -197,10 +197,10 @@ export default class Table {
         return fetch(JSON.stringify(body), this.config)
     }
 
-    delete(id: string | number): Promise<Response>
-    delete(ids: Array<string | number>): Promise<Response>
+    delete(id: string): Promise<Response>
+    delete(ids: string[]): Promise<Response>
 
-    delete(id: string | number | Array<string | number>): Promise<Response> {
+    delete(id: string | string[]): Promise<Response> {
         const body: body = {
             operation: 'delete',
             schema: this.schema,
